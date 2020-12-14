@@ -1,6 +1,6 @@
 # cqls
 
-Interpret Corpus Query Language as a list of queries in JSON format.
+Parse Corpus Query Language into a list of queries in JSON format.
 
 
 ## Installation
