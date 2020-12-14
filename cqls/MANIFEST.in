@@ -1,0 +1,2 @@
+include CQL/test/*.txt
+include README.md
