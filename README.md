@@ -25,3 +25,11 @@ pip install cqls
     [{'match': {'word': ['我']}, 'not_match': {}}, {'match': {'pos': ['V.']}, 'not_match': {}}, {'match': {'pos': ['V.']}, 'not_match': {}}, {'match': {'pos': ['V.']}, 'not_match': {}}, {'match': {'pos': ['V.']}, 'not_match': {}}]
 ]
 ```
+
+
+## Supported CQL features
+
+- token: `[]`, `"我"`, `[word="我"]`, `[word!="我" & pos="N.*"]`
+- token-level quantifier: `+`, `*`, `?`, `{n,m}`
+- grouping: `("a" "b"? "c"){1,2}`
+- label: `lab1:[word="我" & pos="N.*"] lab2:("a" "b")`
