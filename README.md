@@ -1,4 +1,4 @@
-# cqls
+# Corpus Query Langauge Subset
 
 Parse Corpus Query Language into a list of queries in JSON format.
 
