@@ -11,7 +11,7 @@ def expand_quantifiers(tokens: list, max_quant: int=15):
     for i, tk in enumerate(tokens):
         if tk.type.name == 'TOKEN_QUANTIFIER':
             min_ = tk.value[0]
-            max_ = tk.value[1] + 1 if tk.value[1] != 'inf' else max_quant
+            max_ = (tk.value[1] if tk.value[1] != 'inf' else max_quant) + 1
             quantify_info.append([i, 
                 list(range(min_, max_))]
             )
