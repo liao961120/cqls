@@ -4,7 +4,7 @@ with open("README.md", encoding="utf-8") as f:
       long_description = f.read().strip()
 
 setup(name='cqls',
-      version='0.1.4',
+      version='0.1.5',
       description='A parser for an often-used subset of Corpus Query Language',
       long_description=long_description,
       long_description_content_type='text/markdown',
