@@ -1,7 +1,9 @@
+import re
 from .tokens import Token, TokenType
 
 WHITESPACE = ' \t\n'
-NAME_CHARS = set('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_-.')
+NAME_CHARS = re.compile(r'[a-zA-Z0-9〇一-\u9fff㐀-\u4dbf豈-\ufaff_.-]')
+# set('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_-.')
 DIGITS = set('0123456789')
 QUANTIFIERS = set('?+*')
 ESCAPECHAR = chr(92)   # backslash
@@ -47,7 +49,7 @@ class Lexer:
             elif self.char_in_token_brackets and (not self.char_in_attr_quotes) and (self.current_char == '!' or self.current_char == '='):
                 yield self.generate_attr_relation()
             # ATTR_NAME
-            elif self.char_in_token_brackets and (not self.char_in_attr_quotes) and self.current_char in NAME_CHARS:
+            elif self.char_in_token_brackets and (not self.char_in_attr_quotes) and NAME_CHARS.search(self.current_char):
                 yield self.generate_attr_name()
             # ATTR_VALUE
             #elif self.char_in_attr_quotes:
@@ -63,7 +65,7 @@ class Lexer:
             elif (not self.char_in_token_brackets) and (not self.char_in_attr_quotes) and self.current_char in WHITESPACE:
                 self.advance()
             # TOKEN_LABEL
-            elif (not self.char_in_token_brackets) and (not self.char_in_attr_quotes) and (not self.char_in_quantifiers) and self.current_char in NAME_CHARS:
+            elif (not self.char_in_token_brackets) and (not self.char_in_attr_quotes) and (not self.char_in_quantifiers) and NAME_CHARS.search(self.current_char):
                 yield self.generate_token_label()
             # TOKEN_LABEL end
             elif (not self.char_in_token_brackets) and (not self.char_in_attr_quotes) and (not self.char_in_quantifiers) and self.current_char == ':':
@@ -104,7 +106,7 @@ class Lexer:
         name_str = self.current_char
         self.advance()
 
-        while self.current_char != None and self.current_char in NAME_CHARS:
+        while self.current_char != None and NAME_CHARS.search(self.current_char):
             name_str += self.current_char
             self.advance()
 
@@ -181,7 +183,7 @@ class Lexer:
         label_str = self.current_char
         self.advance()
 
-        while self.current_char != None and self.current_char in NAME_CHARS:
+        while self.current_char != None and NAME_CHARS.search(self.current_char):
             label_str += self.current_char
             self.advance()
         
